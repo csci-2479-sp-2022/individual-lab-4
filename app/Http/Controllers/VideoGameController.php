@@ -17,5 +17,6 @@ class VideoGameController extends Controller
     private static function getGames()
     {
         return VideoGame::with(['system', 'categories'])->get();
+
     }
 }
