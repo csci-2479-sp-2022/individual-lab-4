@@ -30,17 +30,15 @@ class VideoGameSeeder extends Seeder
                 'release_year' => '1985',
                 'completed' => true,
             ],
-            // could add additional games here
-
-        ]);
-
-        $nes->videoGames()->createMany([
             [
-                'title' => 'Super Mario Bros',
+                'title' => 'Luigis Mantion',
                 'release_year' => '1985',
                 'completed' => true,
             ],
             // could add additional games here
+
         ]);
+
+        
     }
 }

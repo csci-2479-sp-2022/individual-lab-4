@@ -10,7 +10,7 @@ class VideoGame extends Model
 {
     use HasFactory;
 
-    public function sytem()
+    public function system()
     {
         return $this->belongsTo(System::class);
     }
