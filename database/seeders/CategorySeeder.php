@@ -16,9 +16,23 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $factory = Category::factory();
-        $factory->create([
+        $factory->createMany([
+            [
             'name' => 'Action',
             'code' => 'ACT',
+            ],
+            [
+                'name' => 'Puzzle',
+                'code' => 'PZL',
+            ],
+            [
+                'name' => 'Adventure',
+                'code' => 'ADV',
+            ],
+            [
+                'name' => 'Platformer',
+                'code' => 'PLT',
+            ]
         ]);
     }
 }

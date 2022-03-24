@@ -31,11 +31,15 @@ class VideoGameSeeder extends Seeder
                 'completed' => true,
             ],
             [
-                'title' => 'Luigis Mantion',
-                'release_year' => '1985',
+                'title' => 'SpiderMan 2',
+                'release_year' => '2004',
+                'completed' => false,
+            ],
+            [
+                'title' => 'Tony Hawks Underground',
+                'release_year' => '2003',
                 'completed' => true,
             ],
-            // could add additional games here
 
         ]);
 

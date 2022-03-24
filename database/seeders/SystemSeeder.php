@@ -16,9 +16,18 @@ class SystemSeeder extends Seeder
     public function run()
     {
         $factory = System::factory();
-        $factory->create([
+        $factory->createMany([[
             'name' => 'Super Nintendo',
             'code' => 'NES',
+        ],
+        [
+            'name' => 'Xbox',
+            'code' => 'XBX',
+        ],
+        [
+            'name' => 'Play Station 2',
+            'code' => 'PS2',
+        ]
         ]);
         //wombat need more systems
     }
