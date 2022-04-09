@@ -16,7 +16,11 @@ use App\Models\VideoGame;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return phpinfo();
 });
 
-Route::get('/video-games', [VideoGameController::class, 'show']);
+Route::get('/video-games', [VideoGameController::class, 'show'])
+    ->name('gamelist');
+Route::get('/video-game', [VideoGameController::class, 'index']);
+Route::post('/video-game', [VideoGameController::class, 'create'])
+    ->name('gameform');

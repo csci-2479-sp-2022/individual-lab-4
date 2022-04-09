@@ -20,6 +20,7 @@ return new class extends Migration
             $table->year('release_year');
             $table->boolean('completed')->default(false);
             $table->foreignId('system_id')->constrained();
+            $table->string('boxart')->nullable();
         });
     }
 

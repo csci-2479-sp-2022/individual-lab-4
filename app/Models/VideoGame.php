@@ -5,10 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class VideoGame extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'release_year',
+        'completed',
+        'boxart',
+    ];
 
     public function system()
     {
@@ -23,6 +31,13 @@ class VideoGame extends Model
     {
         return Attribute::make(
             get: fn ($value, $attributes) => $attributes['completed'] ? 'Yes' : 'No'
+        );
+    }
+
+    public function boxartUrl(): Attribute
+    {
+        return Attribute::make(
+            fn ($value, $attributes) => Storage::url($attributes['boxart'])
         );
     }
 

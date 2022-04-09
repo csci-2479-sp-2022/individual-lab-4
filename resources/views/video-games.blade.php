@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <p>
+        <a href="{{route('gameform')}}">Create new game</a>
+    </p>
     <table style=" margin: 15% auto 0 auto; padding: 10px;   border: 2px solid black;">
         <tr>
             <th>Title</th>
@@ -17,6 +20,7 @@
             <th>Release year</th>
             <th>Completed</th>
             <th>Categories</th>
+            <th>Boxart</th>
         </tr>
         @foreach($games as $game)
         <tr>
@@ -25,6 +29,11 @@
             <td>{{$game->release_year}}</td>
             <td>{{$game->completed_yes_no}}</td>
             <td>{{$game->categoryList()}}</td>
+            <td>
+                @if($game->boxart !== null)
+                    <img src="{{$game->boxart_url}}" alt="{{$game->title}}" height="100">
+                @endif
+            </td>
         </tr>
         @endforeach
     </table>
