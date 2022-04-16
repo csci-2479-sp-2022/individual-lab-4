@@ -7,18 +7,27 @@ use App\Models\System;
 use Illuminate\Http\Request;
 use App\Models\VideoGame;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class VideoGameController extends Controller
 {
     public function show()
     {
+        $this->authorize('viewAny', VideoGame::class);
+
         return view('video-games', [
             'games' => self::getGames(),
         ]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        // if (Gate::denies('access-game-form', $request->user())) {
+        //     return response()->redirectToRoute('gamelist');
+        // }
+        Gate::denyIf(!$request->user()->isAdmin());
+
         return view('game-form', [
             'systems' => self::getSystems(),
         ]);
@@ -26,6 +35,9 @@ class VideoGameController extends Controller
 
     public function create(GameRequest $request)
     {
+        if ($request->user()->cannot('create', VideoGame::class)) {
+            abort(403);
+        }
         // should be $this->videoGameService->saveGame()
         self::saveGame($request);
 

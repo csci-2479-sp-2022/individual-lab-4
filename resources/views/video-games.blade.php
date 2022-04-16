@@ -11,7 +11,9 @@
 
 <body>
     <p>
-        <a href="{{route('gameform')}}">Create new game</a>
+        @if (auth()->user()->isAdmin())
+            <a href="{{route('gameform')}}">Create new game</a>
+        @endif
     </p>
     <table style=" margin: 15% auto 0 auto; padding: 10px;   border: 2px solid black;">
         <tr>
