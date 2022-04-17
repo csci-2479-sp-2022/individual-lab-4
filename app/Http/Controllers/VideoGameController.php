@@ -9,6 +9,7 @@ use App\Models\VideoGame;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class VideoGameController extends Controller
 {
@@ -68,12 +69,17 @@ class VideoGameController extends Controller
 
         // save to database
         $game->save();
+
+        // clear cache
+        Cache::forget('gamelist');
     }
 
     // should be in VideoGameService, cut corners for demo purposes
     private static function getGames()
     {
-        return VideoGame::with(['system', 'categories'])->get();
+        $dayInSeconds = 86400;
+        return Cache::remember('gamelist', $dayInSeconds,
+            fn () => VideoGame::with(['system', 'categories'])->get());
 
     }
 

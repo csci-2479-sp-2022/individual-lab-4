@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -10,6 +11,12 @@ use Tests\TestCase;
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Role::factory()->create();
+    }
 
     public function test_login_screen_can_be_rendered()
     {

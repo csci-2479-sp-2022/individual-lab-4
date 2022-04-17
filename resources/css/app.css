@@ -1,3 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+img.lab4-boxart {
+    width: 100px;
+    height: auto;
+}
