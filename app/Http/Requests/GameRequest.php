@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\System;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
@@ -17,6 +18,7 @@ class GameRequest extends FormRequest
     public function authorize()
     {
         return true;
+        // return auth()->user()->isAdmin();
     }
 
     /**

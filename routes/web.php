@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoGameController;
-use App\Models\VideoGame;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +15,22 @@ use App\Models\VideoGame;
 */
 
 Route::get('/', function () {
-    return phpinfo();
+    return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::get('/video-games', [VideoGameController::class, 'show'])
+    // ->middleware(['auth'])
     ->name('gamelist');
-Route::get('/video-game', [VideoGameController::class, 'index']);
+
+Route::get('/video-game', [VideoGameController::class, 'index'])
+    ->middleware(['auth']);
+
 Route::post('/video-game', [VideoGameController::class, 'create'])
+    ->middleware(['auth'])
     ->name('gameform');
+
+require __DIR__.'/auth.php';
