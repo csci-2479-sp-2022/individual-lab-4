@@ -19,9 +19,9 @@ class VideoGamePolicy
      */
     public function viewAny(User $user)
     {
-        Log::Info('user role: ' . $user->role->name);
+        Log::info('user role: ' . $user->role->name);
         $readPerm = $user->role->permissions->where('name', 'read_game')->first();
-        Log::Info('permission: ' . $readPerm?->name);
+        Log::info('permission: ' . $readPerm?->name);
 
         return $readPerm !== null;
     }
@@ -46,9 +46,9 @@ class VideoGamePolicy
      */
     public function create(User $user)
     {
-        Log::Info('user role: ' . $user->role->name);
+        Log::info('user role: ' . $user->role->name);
         $writePerm = $user->role->permissions->where('name', 'write_game')->first();
-        Log::Info('permission: ' . $writePerm?->name);
+        Log::info('permission: ' . $writePerm?->name);
 
         return $writePerm !== null;
     }

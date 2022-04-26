@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class VideoGameController extends Controller
 {
@@ -72,21 +73,38 @@ class VideoGameController extends Controller
 
         // clear cache
         Cache::forget('gamelist');
+        Log::debug('gamelist cache cleared');
     }
 
     // should be in VideoGameService, cut corners for demo purposes
     private static function getGames()
     {
-        $dayInSeconds = 86400;
-        return Cache::remember('gamelist', $dayInSeconds,
-            fn () => VideoGame::with(['system', 'categories'])->get());
+        $dayInSeconds = 86400; // == 24 hours
+        Log::debug('trying to get gamelist from cache');
 
+        // THE OLDSKOOL WAY OF CHECKING CACHE
+        // $games = Cache::get('gamelist');
+
+        // if ($games === null) {
+        //     $games = VideoGame::with(['system', 'categories'])->get();
+        //     Cache::put('gamelist', $games, $dayInSeconds);
+        // }
+
+        // return $games;
+
+        return Cache::remember('gamelist', $dayInSeconds,
+            function () {
+                $games = VideoGame::with(['system', 'categories'])->get();
+                Log::debug('gamelist not found in cache, querying db...');
+
+                return $games;
+            });
     }
 
     // should be in VideoGameService, cut corners for demo purposes
     private static function getSystems()
     {
-        return System::orderBy('name')->get();
+        return Cache::rememberForever('systems', fn () => System::orderBy('name')->get());
     }
 
     private static function uploadFile(UploadedFile $file): string
