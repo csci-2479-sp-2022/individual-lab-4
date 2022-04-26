@@ -18,3 +18,6 @@ jobs:
       run: |
         docker-compose build laravel.test
         docker push ghcr.io/csci-2479/test-app:latest
+      env:
+        WWWUSER: ${{ secrets.WWWUSER }}
+        WWWGROUP: ${{ secrets.WWWGROUP }}
