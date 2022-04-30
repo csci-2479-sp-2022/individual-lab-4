@@ -27,10 +27,11 @@ class VideoGame extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    // this accessor will render the boolean value as a yes/no string in our html table
     public function completedYesNo(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => $attributes['completed'] ? 'Yes' : 'No'
+            get: fn($value, $attributes) => $attributes['completed'] ? 'Yes' : 'No'
         );
     }
 
@@ -40,7 +41,7 @@ class VideoGame extends Model
             fn ($value, $attributes) => Storage::url($attributes['boxart'])
         );
     }
-
+    // this function will render the categories for each game as a comma-separated list
     public function categoryList(): string
     {
         $catList = [];
