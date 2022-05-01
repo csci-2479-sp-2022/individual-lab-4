@@ -29,10 +29,6 @@ class VideoGameSeeder extends Seeder
         $rpl = Category::where('code', 'RPL')->first();
         $stg = Category::where('code', 'STG')->first();
         $plz = Category::where('code', 'PZL')->first();
-        $platformer = Category::where('code', 'PLT')->first();
-        $adventure = Category::where('code', 'ADV')->first();
-
-
 
         $spt->videoGames()->createMany([
             [
@@ -46,7 +42,6 @@ class VideoGameSeeder extends Seeder
                 'completed' => true,
             ],
         ]);        // could add additional games here
-
 
 
 
@@ -83,12 +78,6 @@ class VideoGameSeeder extends Seeder
         $mario->categories()->attach([
             $act->id,
             $adv->id,
-        ]);
-
-        $mario = VideoGame::where('title', 'Super Mario Bros')->first();
-        $mario->categories()->attach([
-            $platformer->id,
-            $adventure->id,
         ]);
 
         $zelda = VideoGame::where('title', 'The Legend of Zelda')->first();
