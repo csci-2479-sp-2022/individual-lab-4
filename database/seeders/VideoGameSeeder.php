@@ -29,6 +29,9 @@ class VideoGameSeeder extends Seeder
         $rpl = Category::where('code', 'RPL')->first();
         $stg = Category::where('code', 'STG')->first();
         $plz = Category::where('code', 'PZL')->first();
+        $platformer = Category::where('code', 'PLT')->first();
+        $adventure = Category::where('code', 'ADV')->first();
+
 
         $spt->videoGames()->createMany([
             [
@@ -57,8 +60,6 @@ class VideoGameSeeder extends Seeder
                 'completed' => true,
             ],
         ]);
-
-
 
         $pys->videoGames()->createMany([
             [
