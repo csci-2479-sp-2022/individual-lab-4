@@ -21,6 +21,7 @@ class VideoGameSeeder extends Seeder
         $spt = System::where('code', 'SPT')->first();
         $sgs = System::where('code', 'SGS')->first();
         $pys = System::where('code', 'PYS')->first();
+        $nes = System::where('code', 'NES')->first();
 
         //Categories
         $act = Category::where('code', 'ACT')->first();
@@ -28,7 +29,8 @@ class VideoGameSeeder extends Seeder
         $rpl = Category::where('code', 'RPL')->first();
         $stg = Category::where('code', 'STG')->first();
         $plz = Category::where('code', 'PZL')->first();
-
+        $platformer = Category::where('code', 'PLT')->first();
+        $adventure = Category::where('code', 'ADV')->first();
 
 
         $spt->videoGames()->createMany([
@@ -42,7 +44,7 @@ class VideoGameSeeder extends Seeder
                 'release_year' => '1986',
                 'completed' => true,
             ],
-        ]);
+        ]);        // could add additional games here
 
 
 
@@ -59,8 +61,6 @@ class VideoGameSeeder extends Seeder
             ],
         ]);
 
-
-
         $pys->videoGames()->createMany([
             [
                 'title' => 'God Of War', //act adv
@@ -74,8 +74,6 @@ class VideoGameSeeder extends Seeder
             ],
 
         ]);
-
-
 
         $mario = VideoGame::where('title', 'Super Mario Bros')->first();
         $mario->categories()->attach([

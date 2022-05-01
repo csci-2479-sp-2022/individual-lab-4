@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
+
 class VideoGame extends Model
 {
     use HasFactory;
@@ -18,7 +19,7 @@ class VideoGame extends Model
         'boxart',
     ];
 
-    public function system()
+      public function system()
     {
         return $this->belongsTo(System::class);
     }
@@ -27,10 +28,11 @@ class VideoGame extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function completedYesNo(): Attribute
+
+      public function completedYesNo(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => $attributes['completed'] ? 'Yes' : 'No'
+            get: fn($value, $attributes) => $attributes['completed ']? 'Yes' : 'No'
         );
     }
 
@@ -40,7 +42,7 @@ class VideoGame extends Model
             fn ($value, $attributes) => Storage::url($attributes['boxart'])
         );
     }
-
+    // this function will render the categories for each game as a comma-separated list
     public function categoryList(): string
     {
         $catList = [];
